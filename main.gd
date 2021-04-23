@@ -11,14 +11,15 @@ func _ready() -> void:
 		save.open("user://save", File.READ)
 		score = save.get_64()
 	save.close()
-	$Label.text = String(score)
+	update()
 
 
 func _input(event : InputEvent) -> void:
+	update()
+	if OS.get_name() == "HTML5":
+		return
 	if event.is_action_released("quit"):
 		quit()
-	else:
-		update()
 
 
 func update() -> void:
